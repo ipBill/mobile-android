@@ -192,7 +192,6 @@ public class FavoriteListFragment extends Fragment implements IFavoriteListFragm
     };
 
     public void updateViewFavoriteFragment() {
-        Log.d("FavoriteFragment", "updateViewFavoriteFragment");
         favoriteListFragmentPresenter.loadMobileFavorite();
     }
 }

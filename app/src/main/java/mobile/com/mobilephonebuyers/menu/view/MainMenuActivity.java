@@ -65,19 +65,25 @@ public class MainMenuActivity extends AppCompatActivity implements IMainMenuView
     @Override
     public void onUpdateMobileListListener() {
         //Update Mobile List
-        Log.d("MainMenuActivity", "onUpdateMobileListListener");
         MainMenuViewPagerAdapter adapter = ((MainMenuViewPagerAdapter) viewpagerMainMenu.getAdapter());
-        MobileListFragment fragment = (MobileListFragment) adapter.getItem(0);
-        fragment.updateViewMobileList();
+        if (adapter != null) {
+            MobileListFragment fragment = (MobileListFragment) adapter.getItem(0);
+            if(fragment != null) {
+                fragment.updateViewMobileList();
+            }
+        }
     }
 
     @Override
     public void onUpdateFavoriteMobileListListener() {
         //Update Favorite List
-        Log.d("MainMenuActivity", "onUpdateFavoriteMobileListListener");
         MainMenuViewPagerAdapter adapter = ((MainMenuViewPagerAdapter) viewpagerMainMenu.getAdapter());
-        FavoriteListFragment fragment = (FavoriteListFragment) adapter.getItem(1);
-        fragment.updateViewFavoriteFragment();
+        if (adapter != null) {
+            FavoriteListFragment fragment = (FavoriteListFragment) adapter.getItem(1);
+            if (fragment != null) {
+                fragment.updateViewFavoriteFragment();
+            }
+        }
     }
 
     private void init(Bundle savedInstanceState) {
