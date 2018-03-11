@@ -12,4 +12,8 @@ public interface IMobileListFragmentView {
     void updateViewMobileList(List<MobileObject> body);
 
     void showAlertDialogCanNotLoadService();
+
+    void showProgressDialog();
+
+    void hideProgressDialog();
 }

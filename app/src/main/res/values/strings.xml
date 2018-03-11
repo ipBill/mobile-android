@@ -6,4 +6,9 @@
     <string name="text_picture_mobile">Picture mobile</string>
     <string name="text_rating">Rating:</string>
     <string name="text_price">Price:$</string>
+
+
+    <string name="dialog_just_moment_please">Just moment please</string>
+    <string name="dialog_fail_server">Data not found</string>
+    <string name="text_favorite">Favorite</string>
 </resources>

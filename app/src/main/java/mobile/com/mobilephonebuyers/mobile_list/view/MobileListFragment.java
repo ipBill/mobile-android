@@ -1,12 +1,17 @@
 package mobile.com.mobilephonebuyers.mobile_list.view;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +22,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import mobile.com.mobilephonebuyers.R;
 import mobile.com.mobilephonebuyers.mobile_list.adapter.presenter.MobileListAdapterPresenter;
+import mobile.com.mobilephonebuyers.mobile_list.adapter.view.IMobileListAdapterView;
 import mobile.com.mobilephonebuyers.mobile_list.adapter.view.MobileListAdapter;
 import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 import mobile.com.mobilephonebuyers.mobile_list.interactor.MobileListFragmentInteractor;
@@ -29,6 +35,8 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
 
     @BindView(R.id.recyclerViewMobileList)
     RecyclerView recyclerViewMobileList;
+
+    ProgressDialog progressDialog;
 
     MobileListFragmentPresenter mobileListPresenter;
     MobileListAdapterPresenter mobileListAdapterPresenter;
@@ -83,6 +91,7 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
         mobileListPresenter = new MobileListFragmentPresenter(this, new MobileListFragmentInteractor());
         adapter = new MobileListAdapter();
         mobileListAdapterPresenter = new MobileListAdapterPresenter(adapter);
+        adapter.setOnClickFavoriteListener(onClickFavoriteListener);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerViewMobileList.setLayoutManager(manager);
         recyclerViewMobileList.setAdapter(adapter);
@@ -117,13 +126,55 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
 
     @Override
     public void showAlertDialogCanNotLoadService() {
-        
+        showAlertDialog(getString(R.string.dialog_fail_server));
+    }
+
+    @Override
+    public void showProgressDialog() {
+        progressDialog = new ProgressDialog(getContext());
+        progressDialog.setMessage(getString(R.string.dialog_just_moment_please));
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        try {
+            if (progressDialog != null && progressDialog.isShowing()) {
+                progressDialog.dismiss();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showAlertDialog(String message) {
+        Context context = getContext();
+        if (context != null) {
+            AlertDialog.Builder builder;
+            builder = new AlertDialog.Builder(context);
+            builder.setTitle(getString(R.string.app_name))
+                    .setMessage(message)
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show();
+        }
     }
 
     SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
             mobileListPresenter.loadMobileList();
+        }
+    };
+
+    IMobileListAdapterView.MobileListAdapterListener onClickFavoriteListener = new IMobileListAdapterView.MobileListAdapterListener() {
+        @Override
+        public void onClickFavoritePressed(MobileObject mobileObject, boolean isFavorite) {
+            mobileListAdapterPresenter.saveFavoriteToLocal(mobileObject, isFavorite);
         }
     };
 }

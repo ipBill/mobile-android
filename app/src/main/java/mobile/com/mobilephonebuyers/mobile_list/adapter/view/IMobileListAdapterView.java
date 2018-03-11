@@ -10,4 +10,10 @@ import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 
 public interface IMobileListAdapterView {
     void updateViewMobileList(List<MobileObject> body);
+
+    void updateViewForFavorite(List<MobileObject> mobileObjects);
+
+    interface MobileListAdapterListener {
+        void onClickFavoritePressed(MobileObject mobileObject, boolean isFavorite);
+    }
 }

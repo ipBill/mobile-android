@@ -1,7 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
     defaultConfig {
         applicationId "mobile.com.mobilephonebuyers"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -46,6 +49,5 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
 
     compile "com.github.medyo:fancybuttons:$rootProject.ext.fancyButtonVersion"
-
 
 }

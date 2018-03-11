@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
 
     private List<MobileObject> mobileList;
     private Context context;
+    public IMobileListAdapterView.MobileListAdapterListener listener;
 
     public MobileListAdapter() {
 
@@ -51,7 +53,7 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
     }
 
     @SuppressLint("CheckResult")
-    private void setViewHolderMobileList(MobileListViewHolder holder, MobileObject object) {
+    private void setViewHolderMobileList(MobileListViewHolder holder, final MobileObject object) {
         RequestOptions requestOptions = new RequestOptions();
         requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
         requestOptions.error(R.drawable.ic_error);
@@ -67,6 +69,30 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
 
         holder.tvPrice.setText(String.valueOf(context.getString(R.string.text_price) + object.getPrice()));
         holder.tvRating.setText(String.valueOf(context.getString(R.string.text_rating) + object.getRating()));
+
+        if (object.isFavorite()) {
+            Glide.with(context)
+                    .load(R.drawable.ic_favorite_pressed)
+                    .into(holder.ivFavorite);
+        } else {
+            Glide.with(context)
+                    .load(R.drawable.ic_favorite_default)
+                    .into(holder.ivFavorite);
+        }
+
+        View.OnClickListener onClickFavoriteListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    if (object.isFavorite()) {
+                        listener.onClickFavoritePressed(object, false);
+                    } else {
+                        listener.onClickFavoritePressed(object, true);
+                    }
+                }
+            }
+        };
+        holder.ivFavorite.setOnClickListener(onClickFavoriteListener);
     }
 
     @Override
@@ -81,6 +107,16 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
     public void updateViewMobileList(List<MobileObject> body) {
         this.mobileList = body;
         notifyDataSetChanged();
+    }
+
+    @Override
+    public void updateViewForFavorite(List<MobileObject> mobileObjects) {
+        this.mobileList = mobileObjects;
+        notifyDataSetChanged();
+    }
+
+    public void setOnClickFavoriteListener(IMobileListAdapterView.MobileListAdapterListener listener) {
+        this.listener = listener;
     }
 
     public static class MobileListViewHolder extends RecyclerView.ViewHolder {
@@ -102,6 +138,9 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
 
         @BindView(R.id.tvRating)
         TextView tvRating;
+
+        @BindView(R.id.ivFavorite)
+        ImageView ivFavorite;
 
         public MobileListViewHolder(View itemView) {
             super(itemView);

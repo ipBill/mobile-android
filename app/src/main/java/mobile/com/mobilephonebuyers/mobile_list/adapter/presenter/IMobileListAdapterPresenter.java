@@ -11,4 +11,6 @@ import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 
 public interface IMobileListAdapterPresenter extends BasePresenter {
     void updateViewMobileList(List<MobileObject> body);
+
+    void saveFavoriteToLocal(MobileObject mobileObject, boolean isFavorite);
 }
