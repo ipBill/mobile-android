@@ -93,6 +93,16 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
             }
         };
         holder.ivFavorite.setOnClickListener(onClickFavoriteListener);
+
+        View.OnClickListener onClickMobileDetailListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onClickMobileDetailListener(object);
+                }
+            }
+        };
+        holder.cvMobile.setOnClickListener(onClickMobileDetailListener);
     }
 
     @Override
@@ -117,7 +127,7 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
     }
 
     private void updateValueFavorite() {
-        if(listener != null) {
+        if (listener != null) {
             listener.canUpdateFavoriteSuccessful();
         }
     }
@@ -128,7 +138,7 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
 
     @Override
     public void canNotUpdateFavorite() {
-        if(listener != null) {
+        if (listener != null) {
             listener.canNotUpdateFavorite();
         }
     }

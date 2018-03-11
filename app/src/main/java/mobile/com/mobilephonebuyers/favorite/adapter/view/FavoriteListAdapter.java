@@ -31,6 +31,7 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
 
     private List<MobileObject> mobileList;
     private Context context;
+    private IFavoriteListAdapterView.FavoriteListAdapterViewListener listener;
 
     @NonNull
     @Override
@@ -89,6 +90,20 @@ public class FavoriteListAdapter extends RecyclerView.Adapter<FavoriteListAdapte
         holder.tvPrice.setText(String.valueOf(context.getString(R.string.text_price) + object.getPrice()));
         holder.tvRating.setText(String.valueOf(context.getString(R.string.text_rating) + object.getRating()));
 
+        View.OnClickListener onClickMobileDetailListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (listener != null) {
+                    listener.onClickMobileDetailListener(object);
+                }
+            }
+        };
+
+        holder.cvMobile.setOnClickListener(onClickMobileDetailListener);
+    }
+
+    public void setOnClickMobileDetailListener(IFavoriteListAdapterView.FavoriteListAdapterViewListener listener) {
+        this.listener = listener;
     }
 
     public static class FavoriteViewHolder extends RecyclerView.ViewHolder {

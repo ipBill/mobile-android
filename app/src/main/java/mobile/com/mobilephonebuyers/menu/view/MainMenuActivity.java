@@ -1,5 +1,6 @@
 package mobile.com.mobilephonebuyers.menu.view;
 
+import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mobile.com.mobilephonebuyers.R;
@@ -24,6 +27,8 @@ import mobile.com.mobilephonebuyers.favorite.view.IFavoriteListFragmentView;
 import mobile.com.mobilephonebuyers.manager.SharedPreferenceManager;
 import mobile.com.mobilephonebuyers.menu.adapter.MainMenuViewPagerAdapter;
 import mobile.com.mobilephonebuyers.menu.presenter.MainMenuPresenter;
+import mobile.com.mobilephonebuyers.mobile_detail.view.MobileDetailActivity;
+import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 import mobile.com.mobilephonebuyers.mobile_list.view.IMobileListFragmentView;
 import mobile.com.mobilephonebuyers.mobile_list.view.MobileListFragment;
 
@@ -109,6 +114,13 @@ public class MainMenuActivity extends AppCompatActivity implements IMainMenuView
     public void updateViewSort(int sortId) {
         onUpdateMobileListListener();
         onUpdateFavoriteMobileListListener();
+    }
+
+    @Override
+    public void onClickMobileDetailListener(MobileObject mobileObject) {
+        Intent goMobileDetail = new Intent(MainMenuActivity.this, MobileDetailActivity.class);
+        goMobileDetail.putExtra("mobileDetail", Parcels.wrap(mobileObject));
+        startActivity(goMobileDetail);
     }
 
     private void showDialogSort() {

@@ -21,5 +21,7 @@ public interface IMobileListAdapterView {
         void canNotUpdateFavorite();
 
         void canUpdateFavoriteSuccessful();
+
+        void onClickMobileDetailListener(MobileObject mobileObject);
     }
 }

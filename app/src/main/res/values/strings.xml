@@ -20,5 +20,7 @@
     <string name="text_price_low_to_high">Price low to high</string>
     <string name="text_price_high_to_low">Price high to low</string>
     <string name="text_rating_5_to_1">Rating 5-1</string>
+    <string name="name_rating">Name rating</string>
+    <string name="title_mobile_phone">Mobile Phone</string>
 
 </resources>

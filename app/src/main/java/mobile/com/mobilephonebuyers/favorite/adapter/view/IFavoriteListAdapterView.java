@@ -14,4 +14,8 @@ public interface IFavoriteListAdapterView {
     void updateViewRemoveFavoriteSuccessful(int position);
 
     void updateViewRemoveFavoriteNotSuccessful(int position);
+
+    interface FavoriteListAdapterViewListener {
+        void onClickMobileDetailListener(MobileObject mobileDetail);
+    }
 }

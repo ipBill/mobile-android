@@ -8,4 +8,9 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+
+    <color name="overlay_pressed">#80000000</color>
+    <color name="overlay_idle">#00000000</color>
+
 </resources>

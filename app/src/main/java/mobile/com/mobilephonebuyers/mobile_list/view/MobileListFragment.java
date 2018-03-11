@@ -193,5 +193,13 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
                 listener.onUpdateFavoriteMobileListListener();
             }
         }
+
+        @Override
+        public void onClickMobileDetailListener(MobileObject mobileObject) {
+            MobileListFragmentListener listener = (MobileListFragmentListener) getActivity();
+            if (listener != null) {
+                listener.onClickMobileDetailListener(mobileObject);
+            }
+        }
     };
 }

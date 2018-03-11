@@ -20,7 +20,7 @@
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="@string/menu_mobile_list" />
+            app:title="@string/title_mobile_phone" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabsMainMenu"

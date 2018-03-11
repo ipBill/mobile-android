@@ -19,5 +19,7 @@ public interface IMobileListFragmentView {
 
     interface MobileListFragmentListener {
         void onUpdateFavoriteMobileListListener();
+
+        void onClickMobileDetailListener(MobileObject mobileObject);
     }
 }

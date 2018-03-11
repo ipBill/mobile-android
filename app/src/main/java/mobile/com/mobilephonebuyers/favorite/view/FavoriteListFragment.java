@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 import mobile.com.mobilephonebuyers.R;
 import mobile.com.mobilephonebuyers.favorite.adapter.presenter.FavoriteListAdapterPresenter;
 import mobile.com.mobilephonebuyers.favorite.adapter.view.FavoriteListAdapter;
+import mobile.com.mobilephonebuyers.favorite.adapter.view.IFavoriteListAdapterView;
 import mobile.com.mobilephonebuyers.favorite.presenter.FavoriteListFragmentPresenter;
 import mobile.com.mobilephonebuyers.manager.SharedPreferenceManager;
 import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
@@ -89,6 +90,7 @@ public class FavoriteListFragment extends Fragment implements IFavoriteListFragm
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         recyclerViewFavorite.setLayoutManager(manager);
         recyclerViewFavorite.setAdapter(adapter);
+        adapter.setOnClickMobileDetailListener(onClickMobileDetailListener);
         initSwipeRecyclerView();
 
         if (savedInstanceState == null) {
@@ -191,7 +193,17 @@ public class FavoriteListFragment extends Fragment implements IFavoriteListFragm
         }
     };
 
+    IFavoriteListAdapterView.FavoriteListAdapterViewListener onClickMobileDetailListener = new IFavoriteListAdapterView.FavoriteListAdapterViewListener() {
+        @Override
+        public void onClickMobileDetailListener(MobileObject mobileDetail) {
+            FavoriteListFragmentListener listener = (FavoriteListFragmentListener) getActivity();
+            if (listener != null) {
+                listener.onClickMobileDetailListener(mobileDetail);
+            }
+        }
+    };
+
     public void updateViewFavoriteFragment(int sortId) {
-        favoriteListFragmentPresenter.loadMobileFavorite(SharedPreferenceManager.getInstance().getSortId());
+        favoriteListFragmentPresenter.loadMobileFavorite(sortId);
     }
 }
