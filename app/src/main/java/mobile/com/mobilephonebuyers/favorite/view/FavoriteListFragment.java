@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +22,7 @@ import mobile.com.mobilephonebuyers.R;
 import mobile.com.mobilephonebuyers.favorite.adapter.presenter.FavoriteListAdapterPresenter;
 import mobile.com.mobilephonebuyers.favorite.adapter.view.FavoriteListAdapter;
 import mobile.com.mobilephonebuyers.favorite.presenter.FavoriteListFragmentPresenter;
+import mobile.com.mobilephonebuyers.manager.SharedPreferenceManager;
 import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 
 public class FavoriteListFragment extends Fragment implements IFavoriteListFragmentView {
@@ -92,7 +92,7 @@ public class FavoriteListFragment extends Fragment implements IFavoriteListFragm
         initSwipeRecyclerView();
 
         if (savedInstanceState == null) {
-            favoriteListFragmentPresenter.loadMobileFavorite();
+            favoriteListFragmentPresenter.loadMobileFavorite(SharedPreferenceManager.getInstance().getSortId());
         }
         swipeLayoutFavorite.setOnRefreshListener(onRefreshListener);
     }
@@ -187,11 +187,11 @@ public class FavoriteListFragment extends Fragment implements IFavoriteListFragm
     SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            favoriteListFragmentPresenter.loadMobileFavorite();
+            favoriteListFragmentPresenter.loadMobileFavorite(SharedPreferenceManager.getInstance().getSortId());
         }
     };
 
-    public void updateViewFavoriteFragment() {
-        favoriteListFragmentPresenter.loadMobileFavorite();
+    public void updateViewFavoriteFragment(int sortId) {
+        favoriteListFragmentPresenter.loadMobileFavorite(SharedPreferenceManager.getInstance().getSortId());
     }
 }

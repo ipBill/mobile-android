@@ -8,4 +8,10 @@ import mobile.com.mobilephonebuyers.base.BasePresenter;
 
 public interface IMainMenuPresenter extends BasePresenter {
     void initMainMenu();
+
+    void initSortMenu();
+
+    void initShowSortMenu();
+
+    void initViewSort(int sortId);
 }

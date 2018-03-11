@@ -2,7 +2,6 @@ package mobile.com.mobilephonebuyers.mobile_list.presenter;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import org.parceler.Parcels;
 
@@ -41,25 +40,25 @@ public class MobileListFragmentPresenter implements IMobileListFragmentPresenter
     }
 
     @Override
-    public void loadMobileList() {
+    public void loadMobileList(int sortId) {
         mobileListFragmentView.showProgressDialog();
-        mobileListFragmentInteractor.loadMobileListFromService(this);
+        mobileListFragmentInteractor.loadMobileListFromService(sortId, this);
     }
 
     @Override
-    public void loadMobileListFromServiceFinished(boolean isSuccess, List<MobileObject> dao) {
+    public void loadMobileListFromServiceFinished(boolean isSuccess, int sortId, List<MobileObject> dao) {
         if (isSuccess) {
             RealmManager.getInstance().insertOrUpdateMobileList(dao);
-            loadMobileListFromLocal();
+            loadMobileListFromLocal(sortId);
         } else {
-            loadMobileListFromLocal();
+            loadMobileListFromLocal(sortId);
         }
         mobileListFragmentView.hideProgressDialog();
     }
 
-    private void loadMobileListFromLocal() {
-        List<MobileObject> dao = RealmManager.getInstance().loadMobileListFromLocal();
-        if (dao != null) {
+    private void loadMobileListFromLocal(int sortId) {
+        List<MobileObject> dao = RealmManager.getInstance().loadMobileListFromLocal(sortId);
+        if (dao != null && !dao.isEmpty()) {
             this.dao = dao;
             mobileListFragmentView.updateViewMobileList(dao);
         } else {

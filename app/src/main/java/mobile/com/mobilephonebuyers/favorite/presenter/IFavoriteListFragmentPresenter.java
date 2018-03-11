@@ -7,7 +7,7 @@ import mobile.com.mobilephonebuyers.base.BasePresenter;
  */
 
 public interface IFavoriteListFragmentPresenter extends BasePresenter {
-    void loadMobileFavorite();
+    void loadMobileFavorite(int sortId);
 
     void removeFavorite(int position);
 }

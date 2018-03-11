@@ -11,7 +11,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mobile.com.mobilephonebuyers.R;
+import mobile.com.mobilephonebuyers.manager.SharedPreferenceManager;
 import mobile.com.mobilephonebuyers.mobile_list.adapter.presenter.MobileListAdapterPresenter;
 import mobile.com.mobilephonebuyers.mobile_list.adapter.view.IMobileListAdapterView;
 import mobile.com.mobilephonebuyers.mobile_list.adapter.view.MobileListAdapter;
@@ -96,7 +96,7 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
         recyclerViewMobileList.setLayoutManager(manager);
         recyclerViewMobileList.setAdapter(adapter);
         if (savedInstanceState == null) {
-            mobileListPresenter.loadMobileList();
+            mobileListPresenter.loadMobileList(SharedPreferenceManager.getInstance().getSortId());
         }
         swipeLayoutMobileList.setOnRefreshListener(onRefreshListener);
     }
@@ -164,14 +164,14 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
         }
     }
 
-    public void updateViewMobileList() {
-        mobileListPresenter.loadMobileList();
+    public void updateViewMobileList(int sortId) {
+        mobileListPresenter.loadMobileList(sortId);
     }
 
     SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            mobileListPresenter.loadMobileList();
+            mobileListPresenter.loadMobileList(SharedPreferenceManager.getInstance().getSortId());
         }
     };
 

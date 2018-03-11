@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import mobile.com.mobilephonebuyers.manager.RealmManager;
+import mobile.com.mobilephonebuyers.manager.SharedPreferenceManager;
 import mobile.com.mobilephonebuyers.mobile_list.adapter.view.IMobileListAdapterView;
 import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 
@@ -40,7 +41,7 @@ public class MobileListAdapterPresenter implements IMobileListAdapterPresenter {
     public void saveFavoriteToLocal(MobileObject mobileObject, boolean isFavorite) {
         boolean isSuccess = RealmManager.getInstance().updateFavoriteToLocal(mobileObject, isFavorite);
         if (isSuccess) {
-            mobileListAdapterView.updateViewForFavorite(RealmManager.getInstance().loadMobileListFromLocal());
+            mobileListAdapterView.updateViewForFavorite(RealmManager.getInstance().loadMobileListFromLocal(SharedPreferenceManager.getInstance().getSortId()));
         } else {
             mobileListAdapterView.canNotUpdateFavorite();
         }

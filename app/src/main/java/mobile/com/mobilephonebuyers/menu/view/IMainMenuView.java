@@ -6,4 +6,10 @@ package mobile.com.mobilephonebuyers.menu.view;
 
 public interface IMainMenuView {
     void updateViewMainMenu();
+
+    void updateViewSortMenu();
+
+    void updateViewShowSortMenu();
+
+    void updateViewSort(int sortId);
 }

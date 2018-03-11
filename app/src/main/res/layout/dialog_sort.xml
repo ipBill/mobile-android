@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/radioGroupFavorite"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioButton
+        android:id="@+id/radioLowToHigh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding"
+        android:text="@string/text_price_low_to_high" />
+
+    <RadioButton
+        android:id="@+id/radioHighToLow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding"
+        android:text="@string/text_price_high_to_low" />
+
+    <RadioButton
+        android:id="@+id/radioRating"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding"
+        android:text="@string/text_rating_5_to_1" />
+
+</RadioGroup>

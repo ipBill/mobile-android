@@ -3,7 +3,6 @@ package mobile.com.mobilephonebuyers.mobile_list.interactor;
 import java.util.List;
 
 import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
-import mobile.com.mobilephonebuyers.mobile_list.presenter.MobileListFragmentPresenter;
 
 /**
  * Created by bill on 11/3/2018 AD.
@@ -11,10 +10,10 @@ import mobile.com.mobilephonebuyers.mobile_list.presenter.MobileListFragmentPres
 
 public interface IMobileListFragmentInteractor {
 
-    void loadMobileListFromService(LoadMobileListListener listener);
+    void loadMobileListFromService(int sortId, LoadMobileListListener listener);
 
     interface LoadMobileListListener {
 
-        void loadMobileListFromServiceFinished(boolean isSuccess, List<MobileObject> body);
+        void loadMobileListFromServiceFinished(boolean isSuccess, int sortId, List<MobileObject> body);
     }
 }

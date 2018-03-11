@@ -31,4 +31,19 @@ public class MainMenuPresenter implements IMainMenuPresenter {
     public void initMainMenu() {
         mainMenuView.updateViewMainMenu();
     }
+
+    @Override
+    public void initSortMenu() {
+        mainMenuView.updateViewSortMenu();
+    }
+
+    @Override
+    public void initShowSortMenu() {
+        mainMenuView.updateViewShowSortMenu();
+    }
+
+    @Override
+    public void initViewSort(int sortId) {
+        mainMenuView.updateViewSort(sortId);
+    }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 
 import mobile.com.mobilephonebuyers.favorite.view.IFavoriteListFragmentView;
 import mobile.com.mobilephonebuyers.manager.RealmManager;
+import mobile.com.mobilephonebuyers.manager.SharedPreferenceManager;
 import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 
 /**
@@ -36,8 +37,8 @@ public class FavoriteListFragmentPresenter implements IFavoriteListFragmentPrese
     }
 
     @Override
-    public void loadMobileFavorite() {
-        List<MobileObject> mobileList = RealmManager.getInstance().loadMobileListFavoriteFromLocal(true);
+    public void loadMobileFavorite(int sortId) {
+        List<MobileObject> mobileList = RealmManager.getInstance().loadMobileListFavoriteFromLocal(true, sortId);
         if (mobileList != null && !mobileList.isEmpty()) {
             this.mobileList = mobileList;
             favoriteListFragmentView.updateViewMobileFavorite(mobileList);
@@ -49,10 +50,10 @@ public class FavoriteListFragmentPresenter implements IFavoriteListFragmentPrese
     @Override
     public void removeFavorite(int position) {
         boolean isSuccess = RealmManager.getInstance().updateFavoriteToLocal(mobileList.get(position), false);
-        if(isSuccess) {
-            loadMobileFavorite();
+        if (isSuccess) {
+            loadMobileFavorite(SharedPreferenceManager.getInstance().getSortId());
             favoriteListFragmentView.updateViewRemoveFavoriteSuccessful(position);
-        }else {
+        } else {
             favoriteListFragmentView.updateViewRemoveFavoriteNotSuccessful(position);
         }
     }
