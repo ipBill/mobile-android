@@ -1,5 +1,6 @@
 package mobile.com.mobilephonebuyers.mobile_list.adapter.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
@@ -44,10 +46,17 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
 
     @Override
     public void onBindViewHolder(@NonNull MobileListViewHolder holder, int position) {
-
         MobileObject object = mobileList.get(position);
+        setViewHolderMobileList(holder, object);
+    }
 
+    @SuppressLint("CheckResult")
+    private void setViewHolderMobileList(MobileListViewHolder holder, MobileObject object) {
         RequestOptions requestOptions = new RequestOptions();
+        requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
+        requestOptions.error(R.drawable.ic_error);
+        requestOptions.placeholder(R.drawable.ic_loading);
+        requestOptions.centerCrop();
 
         holder.tvTitle.setText(object.getName());
         holder.tvDesc.setText(object.getDescription());
@@ -58,7 +67,6 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
 
         holder.tvPrice.setText(String.valueOf(context.getString(R.string.text_price) + object.getPrice()));
         holder.tvRating.setText(String.valueOf(context.getString(R.string.text_rating) + object.getRating()));
-
     }
 
     @Override
