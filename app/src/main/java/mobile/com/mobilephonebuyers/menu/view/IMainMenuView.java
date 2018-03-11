@@ -5,4 +5,5 @@ package mobile.com.mobilephonebuyers.menu.view;
  */
 
 public interface IMainMenuView {
+    void updateViewMainMenu();
 }
