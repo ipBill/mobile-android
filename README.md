@@ -7,3 +7,6 @@ mobile-android
 - Retrofit 2.0
 - GSON
 - Parceler
+- Realm Database
+- Image Slider
+- Saved instance state

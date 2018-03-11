@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Mobile Phone Buyer’s</string>
+
+    <string name="menu_mobile_list">Mobile List</string>
+    <string name="menu_favorite_list">Favorite List</string>
+    <string name="text_picture_mobile">Picture mobile</string>
+    <string name="text_rating">Rating:</string>
+    <string name="text_price">Price:$</string>
+
+
+    <string name="dialog_just_moment_please">Just moment please</string>
+    <string name="dialog_fail_server">Data not found</string>
+    <string name="text_favorite">Favorite</string>
+    <string name="dialog_confirm_delete">Are you sure to delete?</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="dialog_can_not_favorite">Can not save favorite. Please try again</string>
+    <string name="text_sort">Sort</string>
+
+    <string name="text_price_low_to_high">Price low to high</string>
+    <string name="text_price_high_to_low">Price high to low</string>
+    <string name="text_rating_5_to_1">Rating 5-1</string>
+    <string name="name_rating">Name rating</string>
+    <string name="title_mobile_phone">Mobile Phone</string>
+
 </resources>
