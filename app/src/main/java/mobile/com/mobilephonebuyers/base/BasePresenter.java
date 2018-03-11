@@ -7,7 +7,4 @@ public interface BasePresenter {
 
     public void onSaveInstanceState(@NonNull Bundle outState);
     public void onRestoreInstanceState(@NonNull Bundle savedInstanceState);
-    public void onDestroy();
-    public void onDestroyView();
-
 }

@@ -7,4 +7,5 @@ import mobile.com.mobilephonebuyers.base.BasePresenter;
  */
 
 public interface IMobileListFragmentPresenter extends BasePresenter {
+    void loadMobileList();
 }

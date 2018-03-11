@@ -62,9 +62,7 @@ public class MainMenuActivity extends AppCompatActivity implements IMainMenuView
     private void init(Bundle savedInstanceState) {
         ButterKnife.bind(this);
         mainMenuPresenter = new MainMenuPresenter(this);
-        if (savedInstanceState == null) {
-            mainMenuPresenter.initMainMenu();
-        }
+        mainMenuPresenter.initMainMenu();
     }
 
     private void setupViewPager(ViewPager viewPager, TabLayout tabsMainMenu) {

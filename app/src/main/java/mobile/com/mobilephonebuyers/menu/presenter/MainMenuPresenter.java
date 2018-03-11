@@ -28,16 +28,6 @@ public class MainMenuPresenter implements IMainMenuPresenter {
     }
 
     @Override
-    public void onDestroy() {
-
-    }
-
-    @Override
-    public void onDestroyView() {
-
-    }
-
-    @Override
     public void initMainMenu() {
         mainMenuView.updateViewMainMenu();
     }

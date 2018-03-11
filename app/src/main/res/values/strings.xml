@@ -3,4 +3,7 @@
 
     <string name="menu_mobile_list">Mobile List</string>
     <string name="menu_favorite_list">Favorite List</string>
+    <string name="text_picture_mobile">Picture mobile</string>
+    <string name="text_rating">Rating:</string>
+    <string name="text_price">Price:$</string>
 </resources>

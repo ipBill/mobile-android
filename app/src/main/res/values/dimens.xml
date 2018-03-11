@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_size_extra_small">10sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_medium">14sp</dimen>
+    <dimen name="text_size">16sp</dimen>
+    <dimen name="text_size_large">20sp</dimen>
+    <dimen name="text_size_extra_large">24sp</dimen>
+    <dimen name="text_size_extra_extra_large">34sp</dimen>
+
+
+    <dimen name="margin_padding_small">4dp</dimen>
+    <dimen name="margin_padding">8dp</dimen>
+    <dimen name="margin_padding_large">16dp</dimen>
+    <dimen name="margin_padding_extra_large">24dp</dimen>
+    <dimen name="margin_padding_extra_extra_large">48dp</dimen>
+    <dimen name="margin_padding_extra_extra_extra_large">56dp</dimen>
+
+    <dimen name="space_padding_large">50dp</dimen>
+    <dimen name="space_padding_extra_extra_large">100dp</dimen>
+
+    <dimen name="radius_extra_extra_small">4dp</dimen>
+    <dimen name="radius_extra_small">8dp</dimen>
+    <dimen name="radius_small">16dp</dimen>
+    <dimen name="radius_large">24dp</dimen>
+    <dimen name="width_button">150dp</dimen>
+
+</resources>
