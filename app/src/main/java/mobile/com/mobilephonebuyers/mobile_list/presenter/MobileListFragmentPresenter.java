@@ -49,7 +49,6 @@ public class MobileListFragmentPresenter implements IMobileListFragmentPresenter
     @Override
     public void loadMobileListFromServiceFinished(boolean isSuccess, List<MobileObject> dao) {
         if (isSuccess) {
-            //insert to Realm
             RealmManager.getInstance().insertOrUpdateMobileList(dao);
             loadMobileListFromLocal();
         } else {
@@ -67,6 +66,5 @@ public class MobileListFragmentPresenter implements IMobileListFragmentPresenter
             mobileListFragmentView.showAlertDialogCanNotLoadService();
         }
     }
-
 
 }

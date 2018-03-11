@@ -13,7 +13,13 @@ public interface IMobileListAdapterView {
 
     void updateViewForFavorite(List<MobileObject> mobileObjects);
 
+    void canNotUpdateFavorite();
+
     interface MobileListAdapterListener {
         void onClickFavoritePressed(MobileObject mobileObject, boolean isFavorite);
+
+        void canNotUpdateFavorite();
+
+        void canUpdateFavoriteSuccessful();
     }
 }

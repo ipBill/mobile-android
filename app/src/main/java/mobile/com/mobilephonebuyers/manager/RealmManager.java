@@ -1,7 +1,5 @@
 package mobile.com.mobilephonebuyers.manager;
 
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,5 +99,30 @@ public class RealmManager {
             isSuccess = false;
         }
         return isSuccess;
+    }
+
+    public List<MobileObject> loadMobileListFavoriteFromLocal(boolean isFavorite) {
+        List<MobileObject> result = new ArrayList<>();
+        RealmResults<MobileRealmObject> realmResult = realm.where(MobileRealmObject.class)
+                .equalTo("isFavorite", isFavorite)
+                .findAll();
+        for (MobileRealmObject realmObject : realmResult) {
+            MobileObject mobileObject = new MobileObject();
+            mobileObject.setId(realmObject.getId());
+            mobileObject.setName(realmObject.getName());
+            mobileObject.setDescription(realmObject.getDescription());
+            mobileObject.setBrand(realmObject.getBrand());
+            mobileObject.setPrice(realmObject.getPrice());
+            mobileObject.setRating(realmObject.getRating());
+            mobileObject.setThumbImageURL(realmObject.getThumbImageURL());
+            mobileObject.setFavorite(realmObject.isFavorite());
+            result.add(mobileObject);
+        }
+        return result;
+    }
+
+    public boolean deleteFavorite(MobileObject mobileObject) {
+
+        return false;
     }
 }

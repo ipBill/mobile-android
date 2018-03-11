@@ -7,16 +7,19 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mobile.com.mobilephonebuyers.R;
 import mobile.com.mobilephonebuyers.favorite.view.FavoriteListFragment;
+import mobile.com.mobilephonebuyers.favorite.view.IFavoriteListFragmentView;
 import mobile.com.mobilephonebuyers.menu.adapter.MainMenuViewPagerAdapter;
 import mobile.com.mobilephonebuyers.menu.presenter.MainMenuPresenter;
+import mobile.com.mobilephonebuyers.mobile_list.view.IMobileListFragmentView;
 import mobile.com.mobilephonebuyers.mobile_list.view.MobileListFragment;
 
-public class MainMenuActivity extends AppCompatActivity implements IMainMenuView {
+public class MainMenuActivity extends AppCompatActivity implements IMainMenuView, IFavoriteListFragmentView.FavoriteListFragmentListener, IMobileListFragmentView.MobileListFragmentListener {
 
     MainMenuPresenter mainMenuPresenter;
 
@@ -57,6 +60,24 @@ public class MainMenuActivity extends AppCompatActivity implements IMainMenuView
     @Override
     public void updateViewMainMenu() {
         setupViewPager(viewpagerMainMenu, tabsMainMenu);
+    }
+
+    @Override
+    public void onUpdateMobileListListener() {
+        //Update Mobile List
+        Log.d("MainMenuActivity", "onUpdateMobileListListener");
+        MainMenuViewPagerAdapter adapter = ((MainMenuViewPagerAdapter) viewpagerMainMenu.getAdapter());
+        MobileListFragment fragment = (MobileListFragment) adapter.getItem(0);
+        fragment.updateViewMobileList();
+    }
+
+    @Override
+    public void onUpdateFavoriteMobileListListener() {
+        //Update Favorite List
+        Log.d("MainMenuActivity", "onUpdateFavoriteMobileListListener");
+        MainMenuViewPagerAdapter adapter = ((MainMenuViewPagerAdapter) viewpagerMainMenu.getAdapter());
+        FavoriteListFragment fragment = (FavoriteListFragment) adapter.getItem(1);
+        fragment.updateViewFavoriteFragment();
     }
 
     private void init(Bundle savedInstanceState) {

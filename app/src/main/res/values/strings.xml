@@ -11,4 +11,8 @@
     <string name="dialog_just_moment_please">Just moment please</string>
     <string name="dialog_fail_server">Data not found</string>
     <string name="text_favorite">Favorite</string>
+    <string name="dialog_confirm_delete">Are you sure to delete?</string>
+    <string name="btn_remove">Remove</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="dialog_can_not_favorite">Can not save favorite. Please try again</string>
 </resources>

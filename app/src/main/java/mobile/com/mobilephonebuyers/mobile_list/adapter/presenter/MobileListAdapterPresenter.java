@@ -2,7 +2,6 @@ package mobile.com.mobilephonebuyers.mobile_list.adapter.presenter;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class MobileListAdapterPresenter implements IMobileListAdapterPresenter {
         if (isSuccess) {
             mobileListAdapterView.updateViewForFavorite(RealmManager.getInstance().loadMobileListFromLocal());
         } else {
-            Log.d("response", isFavorite + " Null");
+            mobileListAdapterView.canNotUpdateFavorite();
         }
     }
 }

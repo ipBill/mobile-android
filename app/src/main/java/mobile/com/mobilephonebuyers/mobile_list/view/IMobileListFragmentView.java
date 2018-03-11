@@ -16,4 +16,8 @@ public interface IMobileListFragmentView {
     void showProgressDialog();
 
     void hideProgressDialog();
+
+    interface MobileListFragmentListener {
+        void onUpdateFavoriteMobileListListener();
+    }
 }

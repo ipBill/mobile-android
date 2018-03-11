@@ -164,6 +164,10 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
         }
     }
 
+    public void updateViewMobileList() {
+        mobileListPresenter.loadMobileList();
+    }
+
     SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
@@ -175,6 +179,19 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
         @Override
         public void onClickFavoritePressed(MobileObject mobileObject, boolean isFavorite) {
             mobileListAdapterPresenter.saveFavoriteToLocal(mobileObject, isFavorite);
+        }
+
+        @Override
+        public void canNotUpdateFavorite() {
+            showAlertDialog(getString(R.string.dialog_can_not_favorite));
+        }
+
+        @Override
+        public void canUpdateFavoriteSuccessful() {
+            MobileListFragmentListener listener = (MobileListFragmentListener) getActivity();
+            if (listener != null) {
+                listener.onUpdateFavoriteMobileListListener();
+            }
         }
     };
 }

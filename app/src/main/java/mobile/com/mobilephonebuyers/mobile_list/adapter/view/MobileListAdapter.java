@@ -113,10 +113,24 @@ public class MobileListAdapter extends RecyclerView.Adapter<MobileListAdapter.Mo
     public void updateViewForFavorite(List<MobileObject> mobileObjects) {
         this.mobileList = mobileObjects;
         notifyDataSetChanged();
+        updateValueFavorite();
+    }
+
+    private void updateValueFavorite() {
+        if(listener != null) {
+            listener.canUpdateFavoriteSuccessful();
+        }
     }
 
     public void setOnClickFavoriteListener(IMobileListAdapterView.MobileListAdapterListener listener) {
         this.listener = listener;
+    }
+
+    @Override
+    public void canNotUpdateFavorite() {
+        if(listener != null) {
+            listener.canNotUpdateFavorite();
+        }
     }
 
     public static class MobileListViewHolder extends RecyclerView.ViewHolder {
