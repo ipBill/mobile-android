@@ -62,13 +62,13 @@ public class RealmManager {
         RealmResults<MobileRealmObject> realmResult;
         List<MobileObject> result = new ArrayList<>();
         if (sortId == 0) { //Low to High
-            realmResult = realm.where(MobileRealmObject.class).sort("price", Sort.ASCENDING).findAll();
+            realmResult = realm.where(MobileRealmObject.class).sort(MobileRealmObject.TAG_Price, Sort.ASCENDING).findAll();
         } else if (sortId == 1) { //High to Low
-            realmResult = realm.where(MobileRealmObject.class).sort("price", Sort.DESCENDING).findAll();
+            realmResult = realm.where(MobileRealmObject.class).sort(MobileRealmObject.TAG_Price, Sort.DESCENDING).findAll();
         } else if (sortId == 2) { //Rating 5-1
-            realmResult = realm.where(MobileRealmObject.class).sort("rating", Sort.DESCENDING).findAll();
+            realmResult = realm.where(MobileRealmObject.class).sort(MobileRealmObject.TAG_Rating, Sort.DESCENDING).findAll();
         } else {
-            realmResult = realm.where(MobileRealmObject.class).sort("price", Sort.ASCENDING).findAll();
+            realmResult = realm.where(MobileRealmObject.class).sort(MobileRealmObject.TAG_Price, Sort.ASCENDING).findAll();
         }
         for (MobileRealmObject realmObject : realmResult) {
             MobileObject mobileObject = new MobileObject();
@@ -117,20 +117,20 @@ public class RealmManager {
 
         if (sortId == 0) { //Low to High
             realmResult = realm.where(MobileRealmObject.class)
-                    .equalTo("isFavorite", isFavorite)
-                    .sort("price", Sort.ASCENDING).findAll();
+                    .equalTo(MobileRealmObject.TAG_Favorite, isFavorite)
+                    .sort(MobileRealmObject.TAG_Price, Sort.ASCENDING).findAll();
         } else if (sortId == 1) { //High to Low
             realmResult = realm.where(MobileRealmObject.class)
-                    .equalTo("isFavorite", isFavorite)
-                    .sort("price", Sort.DESCENDING).findAll();
+                    .equalTo(MobileRealmObject.TAG_Favorite, isFavorite)
+                    .sort(MobileRealmObject.TAG_Price, Sort.DESCENDING).findAll();
         } else if (sortId == 2) { //Rating 5-1
             realmResult = realm.where(MobileRealmObject.class)
-                    .equalTo("isFavorite", isFavorite)
-                    .sort("rating", Sort.DESCENDING).findAll();
+                    .equalTo(MobileRealmObject.TAG_Favorite, isFavorite)
+                    .sort(MobileRealmObject.TAG_Rating, Sort.DESCENDING).findAll();
         } else {
             realmResult = realm.where(MobileRealmObject.class)
-                    .equalTo("isFavorite", isFavorite)
-                    .sort("price", Sort.ASCENDING).findAll();
+                    .equalTo(MobileRealmObject.TAG_Favorite, isFavorite)
+                    .sort(MobileRealmObject.TAG_Price, Sort.ASCENDING).findAll();
         }
 
         for (MobileRealmObject realmObject : realmResult) {

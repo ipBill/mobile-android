@@ -131,9 +131,11 @@ public class MobileListFragment extends Fragment implements IMobileListFragmentV
 
     @Override
     public void showProgressDialog() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage(getString(R.string.dialog_just_moment_please));
-        progressDialog.show();
+        if(isAdded()) {
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage(getString(R.string.dialog_just_moment_please));
+            progressDialog.show();
+        }
     }
 
     @Override

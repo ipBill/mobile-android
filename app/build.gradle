@@ -39,6 +39,8 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.retrofitVersion"
     compile "com.squareup.okhttp3:logging-interceptor:$rootProject.ext.loggingVersion"
+    compile "com.github.JakeWharton:ViewPagerIndicator:$rootProject.ext.indicatorVersion"
+
 
     compile "com.github.bumptech.glide:glide:$rootProject.ext.glideVersion"
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.ext.glideVersion"
@@ -48,7 +50,5 @@ dependencies {
 
     compile "com.jakewharton:butterknife:$rootProject.ext.butterknifeVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ext.butterknifeVersion"
-
-    compile "com.github.medyo:fancybuttons:$rootProject.ext.fancyButtonVersion"
 
 }

@@ -5,11 +5,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -22,14 +24,18 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import org.parceler.Parcels;
 
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import mobile.com.mobilephonebuyers.R;
+import mobile.com.mobilephonebuyers.mobile_detail.adapter.SlidingImageAdapter;
 import mobile.com.mobilephonebuyers.mobile_detail.dao.MobileDetailObject;
 import mobile.com.mobilephonebuyers.mobile_detail.interactor.MobileDetailFragmentInteractor;
 import mobile.com.mobilephonebuyers.mobile_detail.presenter.MobileDetailFragmentPresenter;
@@ -39,6 +45,8 @@ public class MobileDetailFragment extends Fragment implements IMobileDetailFragm
 
     MobileDetailFragmentPresenter detailFragmentPresenter;
     MobileObject mobileDetail;
+    private int currentPage = 0;
+    private int NUM_PAGES = 0;
 
     ProgressDialog progressDialog;
 
@@ -51,17 +59,17 @@ public class MobileDetailFragment extends Fragment implements IMobileDetailFragm
     @BindView(R.id.nestedScrollView)
     NestedScrollView nestedScrollView;
 
-    @BindView(R.id.ivMobile)
-    ImageView ivMobile;
-
-    @BindView(R.id.tvTitle)
-    TextView tvTitle;
-
     @BindView(R.id.tvTitleDesc)
     TextView tvTitleDesc;
 
     @BindView(R.id.tvDesc)
     TextView tvDesc;
+
+    @BindView(R.id.indicatorMobileImage)
+    CirclePageIndicator indicatorMobileImage;
+
+    @BindView(R.id.viewPagerMobileImage)
+    ViewPager viewPagerMobileImage;
 
     public MobileDetailFragment() {
         super();
@@ -141,22 +149,51 @@ public class MobileDetailFragment extends Fragment implements IMobileDetailFragm
     @Override
     public void updateMobileDetailImage(List<MobileDetailObject> body) {
 
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.diskCacheStrategy(DiskCacheStrategy.ALL);
-        requestOptions.error(R.drawable.ic_error);
-        requestOptions.placeholder(R.drawable.ic_loading);
+        NUM_PAGES = body.size();
 
-        Glide.with(this)
-                .load(body.get(0).getUrl())
-                .apply(requestOptions)
-                .into(ivMobile);
+        SlidingImageAdapter adapter = new SlidingImageAdapter(body, mobileDetail, getContext());
+        viewPagerMobileImage.setAdapter(adapter);
+        indicatorMobileImage.setViewPager(viewPagerMobileImage);
 
+        // Auto start of viewpager
+        final Handler handler = new Handler();
+        final Runnable Update = new Runnable() {
+            public void run() {
+                if (currentPage == NUM_PAGES) {
+                    currentPage = 0;
+                }
+                viewPagerMobileImage.setCurrentItem(currentPage++, true);
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(Update);
+            }
+        }, 5000, 5000);
+
+        indicatorMobileImage.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                currentPage = position;
+            }
+
+            @Override
+            public void onPageScrolled(int pos, float arg1, int arg2) {
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int pos) {
+
+            }
+        });
     }
 
     @Override
     public void updateMobileDetailDesc(MobileObject mobileObject) {
-        tvTitle.setText(String.valueOf(getString(R.string.text_price) + " " + mobileObject.getPrice()
-                + " " + getString(R.string.text_rating) + " " + mobileObject.getRating()));
         tvTitleDesc.setText(String.valueOf(mobileObject.getName() + " " + mobileObject.getBrand()));
         tvDesc.setText(mobileObject.getDescription());
     }
@@ -164,9 +201,11 @@ public class MobileDetailFragment extends Fragment implements IMobileDetailFragm
 
     @Override
     public void showProgressDialog() {
-        progressDialog = new ProgressDialog(getContext());
-        progressDialog.setMessage(getString(R.string.dialog_just_moment_please));
-        progressDialog.show();
+        if (isAdded()) {
+            progressDialog = new ProgressDialog(getContext());
+            progressDialog.setMessage(getString(R.string.dialog_just_moment_please));
+            progressDialog.show();
+        }
     }
 
     @Override

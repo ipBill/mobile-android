@@ -12,6 +12,11 @@ import mobile.com.mobilephonebuyers.mobile_list.dao.MobileObject;
 
 public class MobileRealmObject extends RealmObject {
 
+    public static final String TAG_ID = "id";
+    public static final String TAG_Price = "price";
+    public static final String TAG_Rating = "rating";
+    public static final String TAG_Favorite = "isFavorite";
+
     @PrimaryKey
     int id;
     String thumbImageURL;
